@@ -1,2 +1,2 @@
 # company-hub
-A centralized platform for software companies to manage clients, products, and subscriptions efficiently
+An open source platform for software companies to manage clients, products, and subscriptions efficiently
