@@ -16,3 +16,10 @@ spring:
   data:
     jdbc:
       dialect: postgresql
+  flyway:
+    url: ${SPRING_DATASOURCE_URL}
+    user: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    locations: classpath:db/migration
+    community-db-support-enabled: true
+    enabled: true
