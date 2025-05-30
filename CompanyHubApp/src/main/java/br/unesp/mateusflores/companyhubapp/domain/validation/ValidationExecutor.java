@@ -22,7 +22,7 @@ public class ValidationExecutor {
     List<FieldError> validate() {
         List<FieldError> errors = new ArrayList<FieldError>();
         for (Validator validator : validators) {
-            FieldError error = validator.validade();
+            FieldError error = validator.validate();
             if (error != null) {
                 errors.add(error);
             }
