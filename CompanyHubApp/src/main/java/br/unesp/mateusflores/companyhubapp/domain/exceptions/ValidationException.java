@@ -14,7 +14,7 @@ public class ValidationException extends RuntimeException {
         var builder = new StringBuilder();
         builder.append("Validation error at:\n");
         for (FieldError error : errors) {
-            builder.append(error.fieldName()).append(": ").append(error.errorDescription());
+            builder.append(error.name()).append(": ").append(error.errorDescription());
         }
         return builder.toString();
     }
