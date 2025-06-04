@@ -1,8 +1,10 @@
-package br.unesp.mateusflores.companyhubapp.domain.repositories;
+package br.unesp.mateusflores.companyhubapp.application.usecases.interfaces;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface GenericEntityRepository<T, UUID> {
+public interface GenericCrudUseCase<T> {
+
     <S extends T> S save(S entity);
 
     Optional<T> findById(UUID id);
@@ -12,4 +14,5 @@ public interface GenericEntityRepository<T, UUID> {
     void delete(T entity);
 
     Boolean existsById(UUID id);
+
 }
