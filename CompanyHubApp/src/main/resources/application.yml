@@ -2,6 +2,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: companyhub
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
@@ -23,3 +27,4 @@ spring:
     locations: classpath:db/migration
     community-db-support-enabled: true
     enabled: true
+    schemas: companyhub
