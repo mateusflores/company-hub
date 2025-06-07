@@ -1,5 +1,6 @@
-package br.unesp.mateusflores.companyhubapp.domain.company;
+package br.unesp.mateusflores.companyhubapp.domain.clientaccount;
 
+import br.unesp.mateusflores.companyhubapp.domain.company.Company;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,14 +14,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "client_accounts", schema = "companyhub")
+@Table(name = "client_accounts")
 public class ClientAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Version
     private Long version;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String identifier;
     @OneToMany(
             cascade = CascadeType.ALL,

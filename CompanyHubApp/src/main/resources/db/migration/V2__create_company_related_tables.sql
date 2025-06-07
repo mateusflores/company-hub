@@ -2,7 +2,7 @@ CREATE TABLE companyhub.client_accounts
 (
     id         UUID         NOT NULL,
     version    BIGINT,
-    identifier VARCHAR(255) NOT NULL,
+    identifier VARCHAR(100) NOT NULL,
     CONSTRAINT pk_client_accounts PRIMARY KEY (id)
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE companyhub.companies
     CONSTRAINT pk_companies PRIMARY KEY (id)
 );
 
-CREATE TABLE companyhub.company_adresses
+CREATE TABLE companyhub.company_addresses
 (
     id           UUID NOT NULL,
     version      BIGINT,
@@ -31,7 +31,7 @@ CREATE TABLE companyhub.company_adresses
     state        VARCHAR(255),
     country      VARCHAR(255),
     company_id   UUID NOT NULL,
-    CONSTRAINT pk_company_adresses PRIMARY KEY (id)
+    CONSTRAINT pk_company_addresses PRIMARY KEY (id)
 );
 
 CREATE TABLE companyhub.company_contacts
@@ -52,7 +52,7 @@ ALTER TABLE companyhub.companies
     ADD CONSTRAINT FK_COMPANIES_ON_CLIENTACCOUNT FOREIGN KEY (client_account_id) REFERENCES companyhub.client_accounts (id);
 
 ALTER TABLE companyhub.company_adresses
-    ADD CONSTRAINT FK_COMPANY_ADRESSES_ON_COMPANY FOREIGN KEY (company_id) REFERENCES companyhub.companies (id);
+    ADD CONSTRAINT FK_COMPANY_ADDRESSES_ON_COMPANY FOREIGN KEY (company_id) REFERENCES companyhub.companies (id);
 
 ALTER TABLE companyhub.company_contacts
     ADD CONSTRAINT FK_COMPANY_CONTACTS_ON_COMPANY FOREIGN KEY (company_id) REFERENCES companyhub.companies (id);

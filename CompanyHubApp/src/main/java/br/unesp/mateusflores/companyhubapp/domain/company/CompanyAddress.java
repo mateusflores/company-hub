@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "company_adresses", schema = "companyhub")
+@Table(name = "company_addresses")
 public class CompanyAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,3 +43,4 @@ public class CompanyAddress {
         return getClass().hashCode();
     }
 }
+

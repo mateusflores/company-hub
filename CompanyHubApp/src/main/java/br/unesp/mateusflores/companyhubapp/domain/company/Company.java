@@ -1,5 +1,6 @@
 package br.unesp.mateusflores.companyhubapp.domain.company;
 
+import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccount;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "companies", schema = "companyhub")
+@Table(name = "companies")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "company_contacts", schema = "companyhub")
+@Table(name = "company_contacts")
 public class CompanyContact {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
