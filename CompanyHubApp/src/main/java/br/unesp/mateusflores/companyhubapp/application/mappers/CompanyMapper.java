@@ -4,7 +4,7 @@ import br.unesp.mateusflores.companyhubapp.domain.company.Company;
 import br.unesp.mateusflores.companyhubapp.domain.company.CompanySummaryDTO;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CompanyMapper {
 
     Company toCompany(CompanySummaryDTO dto);

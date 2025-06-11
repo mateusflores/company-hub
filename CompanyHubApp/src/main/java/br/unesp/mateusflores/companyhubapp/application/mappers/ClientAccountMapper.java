@@ -5,15 +5,13 @@ import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountCre
 import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountSummaryDTO;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = { CompanyMapper.class })
 public interface ClientAccountMapper {
-
 
     ClientAccount toClientAccount(ClientAccountSummaryDTO dto);
 
     ClientAccount toClientAccount(ClientAccountCreateRequestDTO dto);
 
-    @Mapper(uses = CompanyMapper.class)
     ClientAccountSummaryDTO toClientAccountSummaryDto(ClientAccount clientAccount);
 
     ClientAccountCreateRequestDTO toClientAccountRequestDto(ClientAccount clientAccount);

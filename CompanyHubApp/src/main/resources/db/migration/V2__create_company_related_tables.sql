@@ -51,7 +51,7 @@ CREATE TABLE companyhub.company_contacts
 ALTER TABLE companyhub.companies
     ADD CONSTRAINT FK_COMPANIES_ON_CLIENTACCOUNT FOREIGN KEY (client_account_id) REFERENCES companyhub.client_accounts (id);
 
-ALTER TABLE companyhub.company_adresses
+ALTER TABLE companyhub.company_addresses
     ADD CONSTRAINT FK_COMPANY_ADDRESSES_ON_COMPANY FOREIGN KEY (company_id) REFERENCES companyhub.companies (id);
 
 ALTER TABLE companyhub.company_contacts
