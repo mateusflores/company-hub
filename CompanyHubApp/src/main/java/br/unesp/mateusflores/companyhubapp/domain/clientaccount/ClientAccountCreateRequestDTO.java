@@ -1,9 +1,9 @@
 package br.unesp.mateusflores.companyhubapp.domain.clientaccount;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public record ClientAccountCreateRequestDTO(
-        @NotBlank @Max(value = 100) String identifier
+        @NotBlank @Size(max = 100, message = "Identificador de cliente deve ter menos de 100 caracteres") String identifier
 ) {
 }

@@ -4,6 +4,7 @@ import br.unesp.mateusflores.companyhubapp.domain.company.Company;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class ClientAccount {
             cascade = CascadeType.ALL,
             mappedBy = "clientAccount"
     )
-    private Set<Company> companies;
+    private Set<Company> companies = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
