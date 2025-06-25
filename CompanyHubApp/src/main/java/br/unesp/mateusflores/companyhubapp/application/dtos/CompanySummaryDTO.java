@@ -1,4 +1,4 @@
-package br.unesp.mateusflores.companyhubapp.domain.company;
+package br.unesp.mateusflores.companyhubapp.application.dtos;
 
 import java.util.UUID;
 

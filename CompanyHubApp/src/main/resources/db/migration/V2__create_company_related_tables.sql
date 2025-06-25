@@ -2,6 +2,7 @@ CREATE TABLE companyhub.client_accounts
 (
     id         UUID         NOT NULL,
     version    BIGINT,
+    username   VARCHAR(50)  NOT NULL,
     identifier VARCHAR(100) NOT NULL,
     CONSTRAINT pk_client_accounts PRIMARY KEY (id)
 );

@@ -2,8 +2,8 @@ package br.unesp.mateusflores.companyhubapp.application.services.company;
 
 import br.unesp.mateusflores.companyhubapp.application.mappers.ClientAccountMapper;
 import br.unesp.mateusflores.companyhubapp.application.repositories.company.ClientAccountRepository;
-import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountCreateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountSummaryDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountSummaryDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ClientAccountCRUDService {
     }
 
     public ClientAccountSummaryDTO create(@Valid ClientAccountCreateRequestDTO dto) {
-        var clientAccount = mapper.toClientAccount(dto);
+        var clientAccount = mapper.toEntity(dto);
         return mapper.toClientAccountSummaryDto(repository.save(clientAccount));
     }
 

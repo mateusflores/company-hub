@@ -22,6 +22,8 @@ public class ClientAccount {
     private UUID id;
     @Version
     private Long version;
+    @Column(nullable = false, length = 50)
+    private String userName;
     @Column(nullable = false, length = 100)
     private String identifier;
     @OneToMany(

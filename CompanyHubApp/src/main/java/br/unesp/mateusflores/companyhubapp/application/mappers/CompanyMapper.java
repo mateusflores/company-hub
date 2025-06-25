@@ -1,13 +1,12 @@
 package br.unesp.mateusflores.companyhubapp.application.mappers;
 
 import br.unesp.mateusflores.companyhubapp.domain.company.Company;
-import br.unesp.mateusflores.companyhubapp.domain.company.CompanySummaryDTO;
-import org.mapstruct.Mapper;
+import br.unesp.mateusflores.companyhubapp.application.dtos.CompanyCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.CompanySummaryDTO;
 
-@Mapper(componentModel = "spring")
 public interface CompanyMapper {
 
-    Company toCompany(CompanySummaryDTO dto);
+    Company toEntity(CompanyCreateRequestDTO dto);
 
-    CompanySummaryDTO toCompanySummaryDTO(Company company);
+    CompanySummaryDTO toCompanySummaryDTO(Company entity);
 }

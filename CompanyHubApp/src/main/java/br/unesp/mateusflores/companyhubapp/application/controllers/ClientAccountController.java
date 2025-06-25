@@ -1,10 +1,9 @@
 package br.unesp.mateusflores.companyhubapp.application.controllers;
 
 import br.unesp.mateusflores.companyhubapp.application.services.company.ClientAccountCRUDService;
-import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountCreateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccountSummaryDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountSummaryDTO;
 import br.unesp.mateusflores.companyhubapp.exceptions.ResourceNotFoundException;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
