@@ -1,4 +1,4 @@
-package br.unesp.mateusflores.companyhubapp.application.repositories.company;
+package br.unesp.mateusflores.companyhubapp.application.repositories;
 
 import br.unesp.mateusflores.companyhubapp.domain.company.CompanyAddress;
 import org.springframework.data.jpa.repository.JpaRepository;

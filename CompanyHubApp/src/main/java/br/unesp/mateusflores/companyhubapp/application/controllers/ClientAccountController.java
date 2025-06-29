@@ -1,13 +1,20 @@
 package br.unesp.mateusflores.companyhubapp.application.controllers;
 
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountUpdateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.application.services.company.ClientAccountCRUDService;
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountCreateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountSummaryDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountUpdateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.services.ClientAccountCRUDService;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountSummaryDTO;
+import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccount;
 import br.unesp.mateusflores.companyhubapp.exceptions.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,6 +42,13 @@ public class ClientAccountController {
         return ResponseEntity.created(location).body(clientAccountSummaryDTO);
     }
 
+    @GetMapping
+    public HttpEntity<PagedModel<EntityModel<ClientAccountSummaryDTO>>> findAll(
+            Pageable pageable, PagedResourcesAssembler<ClientAccountSummaryDTO> assembler) {
+        Page<ClientAccountSummaryDTO> pages = crudService.findAll(pageable);
+        return ResponseEntity.ok(assembler.toModel(pages));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ClientAccountSummaryDTO> findById(@PathVariable @NotNull String id) {
         var summaryDto = crudService.findById(UUID.fromString(id)).orElseThrow(
@@ -43,17 +57,17 @@ public class ClientAccountController {
         return ResponseEntity.ok().body(summaryDto);
     }
 
-    @PutMapping
-    public ResponseEntity<ClientAccountSummaryDTO> updateClientAccount(@Valid @RequestBody ClientAccountUpdateRequestDTO dto) {
-        var summaryDto = crudService.update(dto);
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientAccountSummaryDTO> updateClientAccount(@PathVariable String id,
+                                                                       @Valid @RequestBody ClientAccountUpdateRequestDTO dto) {
+        var summaryDto = crudService.update(UUID.fromString(id), dto);
         return ResponseEntity.ok().body(summaryDto);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteById(@NotNull UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable @NotNull UUID id) {
         if (!crudService.existsById(id)) throw new ResourceNotFoundException("ID informado não encontrado");
         crudService.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
 }

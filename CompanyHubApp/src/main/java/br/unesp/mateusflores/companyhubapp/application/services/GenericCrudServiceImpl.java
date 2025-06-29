@@ -48,7 +48,8 @@ implements GenericCrudService<ID, CreateDTO, UpdateDTO, ResponseDTO> {
     public ResponseDTO update(ID id, UpdateDTO dto) {
         Entity entityToUpdate = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso com ID " + id + " não encontrado."));
-        Entity updatedEntity = repository.save(mapper.updateDtoToEntity(dto));
+        mapper.updateEntityFromDto(dto, entityToUpdate);
+        Entity updatedEntity = repository.save(entityToUpdate);
         return mapper.entityToResponseDto(updatedEntity);
     }
 

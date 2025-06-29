@@ -1,16 +1,13 @@
 package br.unesp.mateusflores.companyhubapp.application.mappers;
 
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountUpdateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountSummaryDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountUpdateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccount;
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountCreateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountSummaryDTO;
+import org.mapstruct.Mapper;
 
-public interface ClientAccountMapper {
-
-    ClientAccount createDtotoEntity(ClientAccountCreateRequestDTO dto);
-
-    ClientAccount updateDtotoEntity(ClientAccountUpdateRequestDTO dto);
-
-    ClientAccountSummaryDTO toClientAccountSummaryDto(ClientAccount entity);
+@Mapper(componentModel = "spring")
+public interface ClientAccountMapper extends GenericMapper<ClientAccount, ClientAccountCreateRequestDTO,
+        ClientAccountUpdateRequestDTO, ClientAccountSummaryDTO>{
 
 }

@@ -1,4 +1,6 @@
-package br.unesp.mateusflores.companyhubapp.application.dtos;
+package br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount;
+
+import br.unesp.mateusflores.companyhubapp.application.dtos.company.CompanySummaryDTO;
 
 import java.util.Set;
 import java.util.UUID;
