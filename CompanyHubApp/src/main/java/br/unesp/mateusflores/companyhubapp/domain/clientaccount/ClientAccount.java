@@ -22,7 +22,7 @@ public class ClientAccount {
     private UUID id;
     @Version
     private Long version;
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false, length = 50, unique = true)
     private String userName;
     @Column(nullable = false, length = 100)
     private String identifier;

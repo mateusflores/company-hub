@@ -23,7 +23,7 @@ public class Company {
     @Version
     private Long version;
     private Long internalIdentifier;
-    @Column(length = 14, nullable = false)
+    @Column(length = 14, nullable = false, unique = true)
     private String cnpj;
     @Column(nullable = false)
     private String companyName;
