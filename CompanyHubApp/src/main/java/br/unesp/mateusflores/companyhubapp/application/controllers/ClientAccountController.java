@@ -1,5 +1,6 @@
 package br.unesp.mateusflores.companyhubapp.application.controllers;
 
+import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountUpdateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.application.services.company.ClientAccountCRUDService;
 import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountCreateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.ClientAccountSummaryDTO;
@@ -37,9 +38,22 @@ public class ClientAccountController {
     @GetMapping("/{id}")
     public ResponseEntity<ClientAccountSummaryDTO> findById(@PathVariable @NotNull String id) {
         var summaryDto = crudService.findById(UUID.fromString(id)).orElseThrow(
-                () -> new ResourceNotFoundException("Conta de cliente não encontrada.")
+                () -> new ResourceNotFoundException("Conta de cliente não encontrada")
         );
-        return ResponseEntity.ok(summaryDto);
+        return ResponseEntity.ok().body(summaryDto);
+    }
+
+    @PutMapping
+    public ResponseEntity<ClientAccountSummaryDTO> updateClientAccount(@Valid @RequestBody ClientAccountUpdateRequestDTO dto) {
+        var summaryDto = crudService.update(dto);
+        return ResponseEntity.ok().body(summaryDto);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteById(@NotNull UUID id) {
+        if (!crudService.existsById(id)) throw new ResourceNotFoundException("ID informado não encontrado");
+        crudService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }
