@@ -1,6 +1,5 @@
 package br.unesp.mateusflores.companyhubapp.domain.product;
 
-import br.unesp.mateusflores.companyhubapp.domain.subscription.Module;
 import br.unesp.mateusflores.companyhubapp.domain.subscription.Subscription;
 import jakarta.persistence.*;
 import lombok.*;
