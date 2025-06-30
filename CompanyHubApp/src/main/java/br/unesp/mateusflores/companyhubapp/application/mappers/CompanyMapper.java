@@ -6,7 +6,7 @@ import br.unesp.mateusflores.companyhubapp.application.dtos.company.CompanyUpdat
 import br.unesp.mateusflores.companyhubapp.domain.company.Company;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CompanyAddressMapper.class, CompanyContactMapper.class})
 public interface CompanyMapper extends GenericMapper<Company, CompanyCreateRequestDTO,
         CompanyUpdateRequestDTO, CompanySummaryDTO> {
 }
