@@ -1,7 +1,7 @@
 package br.unesp.mateusflores.companyhubapp.application.dtos.company;
 
-import br.unesp.mateusflores.companyhubapp.application.dtos.companyaddress.CompanyAddressCreateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.application.dtos.companycontact.CompanyContactCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.companyaddress.AddressWithoutCompanyIdCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.companycontact.ContactWithoutCompanyIdCreateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.application.util.RegexUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -18,8 +18,8 @@ public record CompanyCreateRequestDTO(
         @NotNull String companyName,
         String tradingName,
         @PastOrPresent LocalDate registrationDate,
-        @Valid List<CompanyContactCreateRequestDTO> contacts,
-        @Valid List<CompanyAddressCreateRequestDTO> addresses,
+        @Valid List<ContactWithoutCompanyIdCreateRequestDTO> contacts,
+        @Valid List<AddressWithoutCompanyIdCreateRequestDTO> addresses,
         UUID clientAccountId
 ) {
 }
