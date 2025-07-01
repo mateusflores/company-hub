@@ -1,4 +1,4 @@
-package br.unesp.mateusflores.companyhubapp.application.controllers;
+package br.unesp.mateusflores.companyhubapp.application.controllers.api;
 
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountCreateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountSummaryDTO;

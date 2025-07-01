@@ -1,0 +1,22 @@
+body {
+    min-height: 100vh;
+}
+
+#sidebar-wrapper {
+    width: 280px; /* Largura do menu lateral */
+    height: 100vh; /* Ocupa a altura inteira */
+    position: fixed; /* Fixa o menu na tela */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Empurra o conteúdo principal para a direita para não ficar atrás do menu */
+#wrapper > main {
+    margin-left: 280px;
+}
+
+/* Estilo para o item de menu ativo */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #0d6efd; /* Cor azul padrão do Bootstrap */
+}

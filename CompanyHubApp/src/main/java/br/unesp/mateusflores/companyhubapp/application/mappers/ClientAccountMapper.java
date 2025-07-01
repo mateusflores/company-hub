@@ -6,8 +6,9 @@ import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.Client
 import br.unesp.mateusflores.companyhubapp.domain.clientaccount.ClientAccount;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface ClientAccountMapper extends GenericMapper<ClientAccount, ClientAccountCreateRequestDTO,
         ClientAccountUpdateRequestDTO, ClientAccountSummaryDTO>{
 
+    ClientAccountUpdateRequestDTO summaryDtoToUpdateRequestDto(ClientAccountSummaryDTO dto);
 }

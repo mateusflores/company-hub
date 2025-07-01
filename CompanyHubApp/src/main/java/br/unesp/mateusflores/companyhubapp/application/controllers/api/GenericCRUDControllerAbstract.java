@@ -1,4 +1,4 @@
-package br.unesp.mateusflores.companyhubapp.application.controllers;
+package br.unesp.mateusflores.companyhubapp.application.controllers.api;
 
 import br.unesp.mateusflores.companyhubapp.application.services.GenericCrudService;
 import org.springframework.data.domain.Page;
@@ -8,7 +8,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 

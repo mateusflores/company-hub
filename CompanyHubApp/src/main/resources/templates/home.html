@@ -1,0 +1,32 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: template(pageTitle='Página Inicial', pageContent=~{::content}, activePage='home')}">
+
+<div th:fragment="content">
+
+    <div class="card">
+        <div class="card-header fs-5">
+            Acesso Rápido
+        </div>
+        <div class="card-body text-center p-4">
+            <a th:href="@{/web/companies}" class="btn btn-primary btn-lg me-3">
+                <i class="bi bi-building-fill me-2"></i>Cadastros
+            </a>
+            <a href="#" class="btn btn-secondary btn-lg">
+                <i class="bi bi-gear-fill me-2"></i>Gerenciar Assinaturas
+            </a>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-auto" style="max-width: 25rem;">
+        <div class="card-header text-center">
+            Sobre o Sistema
+        </div>
+        <div class="card-body text-center">
+            <i class="bi bi-info-circle-fill text-primary" style="font-size: 3rem;"></i>
+            <h5 class="card-title mt-3">Versão 1.0.0</h5>
+            <p class="card-text">Desenvolvido para gestão empresarial</p>
+        </div>
+    </div>
+
+</div>
+</html>

@@ -6,7 +6,7 @@ import br.unesp.mateusflores.companyhubapp.application.dtos.module.ModuleUpdateR
 import br.unesp.mateusflores.companyhubapp.domain.product.Module;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {ProductMapper.class})
+@Mapper(componentModel = "spring")
 public interface ModuleMapper extends GenericMapper<Module, ModuleCreateRequestDTO,
         ModuleUpdateRequestDTO, ModuleSummaryResponseDTO> {
 }
