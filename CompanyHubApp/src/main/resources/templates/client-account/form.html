@@ -1,0 +1,36 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: template(pageTitle=${clientAccountDTO.id == null ? 'Novo Cliente' : 'Editar Cliente'}, pageContent=~{::content}, activePage='clientes')}">
+
+<div th:fragment="content">
+    <h1 class="mt-4 mb-4" th:text="${clientAccountDTO.id == null ? 'Novo Cliente' : 'Editar Cliente'}">Título</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <form th:object="${clientAccountDTO}" th:action="${formAction}" method="post" class="needs-validation" novalidate>
+
+                <input type="hidden" th:if="*{id != null}" th:field="*{id}" />
+
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="userName" th:field="*{userName}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="identifier" class="form-label">Identificador</label>
+                    <input type="text" class="form-control" id="identifier" th:field="*{identifier}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></div>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-end">
+                    <a th:href="@{/web/client-accounts}" class="btn btn-secondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</html>

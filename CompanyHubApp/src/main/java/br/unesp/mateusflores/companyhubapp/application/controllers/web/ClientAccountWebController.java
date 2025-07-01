@@ -1,6 +1,7 @@
 package br.unesp.mateusflores.companyhubapp.application.controllers.web;
 
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountCreateRequestDTO;
+import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountFormDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountSummaryDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountUpdateRequestDTO;
 import br.unesp.mateusflores.companyhubapp.application.mappers.ClientAccountMapper;
@@ -17,64 +18,68 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/web/client-account")
+@RequestMapping("/web/client-accounts")
 public class ClientAccountWebController {
-    private final ClientAccountCRUDService clientAccountService;
-    private final ClientAccountMapper clientAccountMapper;
 
-    public ClientAccountWebController(ClientAccountCRUDService clientAccountService, ClientAccountMapper clientAccountMapper) {
+    private final ClientAccountCRUDService clientAccountService;
+
+    public ClientAccountWebController(ClientAccountCRUDService clientAccountService) {
         this.clientAccountService = clientAccountService;
-        this.clientAccountMapper = clientAccountMapper;
     }
 
-    // 1. Mostra a página principal com a tabela paginada
+    // 1. Mostra a página de listagem (sem alterações)
     @GetMapping
-    public String listClientAccounts(org.springframework.data.domain.Pageable pageable, Model model) {
+    public String listClientAccounts(Pageable pageable, Model model) {
         Page<ClientAccountSummaryDTO> page = clientAccountService.findAll(pageable);
         model.addAttribute("clientAccountPage", page);
         return "client-account/list";
     }
 
-    // 2. Fornece o formulário para um NOVO cliente (retorna só o fragmento HTML)
+    // 2. Mostra a PÁGINA de formulário para um NOVO cliente
     @GetMapping("/new")
     public String showNewClientAccountForm(Model model) {
-        model.addAttribute("clientAccountDTO", new ClientAccountCreateRequestDTO("", ""));
-        model.addAttribute("actionUrl", "/web/client-accounts/create");
-        return "client-account/form-fragment :: form"; // Retorna SÓ o pedaço do formulário
+        model.addAttribute("clientAccountDTO", new ClientAccountFormDTO());
+        model.addAttribute("formAction", "/web/client-accounts/create");
+        return "client-account/form";
     }
 
-    // 3. Fornece o formulário para EDITAR um cliente (retorna o mesmo fragmento, mas com dados)
+    // 3. Mostra a PÁGINA de formulário para EDITAR um cliente
     @GetMapping("/{id}/edit")
     public String showEditClientAccountForm(@PathVariable UUID id, Model model) {
         ClientAccountSummaryDTO dto = clientAccountService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
-        model.addAttribute("clientAccountDTO", clientAccountMapper.summaryDtoToUpdateRequestDto(dto)); // Supondo um mapper
-        model.addAttribute("actionUrl", "/web/client-accounts/" + id + "/edit");
-        return "client-account/form-fragment :: form";
+        // Converte o DTO de resumo para o DTO do formulário
+        ClientAccountFormDTO formDTO = new ClientAccountFormDTO(dto.id(), dto.userName(), dto.identifier());
+        model.addAttribute("clientAccountDTO", formDTO);
+        model.addAttribute("formAction", "/web/client-accounts/" + id + "/edit");
+        return "client-account/form";
     }
 
     // 4. PROCESSA a criação de um novo cliente
     @PostMapping("/create")
-    public String createClientAccount(@Valid @ModelAttribute("clientAccountDTO") ClientAccountCreateRequestDTO dto,
+    public String createClientAccount(@Valid @ModelAttribute("clientAccountDTO") ClientAccountFormDTO dto,
                                       BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("actionUrl", "/web/client-accounts/create");
-            return "client-account/form-fragment :: form"; // Retorna o form com erros de validação
+            model.addAttribute("formAction", "/web/client-accounts/create");
+            return "client-account/form";
         }
-        clientAccountService.create(dto);
-        // Após salvar, retorna a tabela atualizada para o htmx
-        return listClientAccounts(Pageable.ofSize(5), model); // Retorna a primeira página da tabela
+        // Converte para o DTO de criação antes de passar para o serviço
+        ClientAccountCreateRequestDTO createDTO = new ClientAccountCreateRequestDTO(dto.getUserName(), dto.getIdentifier());
+        clientAccountService.create(createDTO);
+        return "redirect:/web/client-accounts";
     }
 
     // 5. PROCESSA a atualização de um cliente
     @PostMapping("/{id}/edit")
-    public String updateClientAccount(@PathVariable UUID id, @Valid @ModelAttribute("clientAccountDTO") ClientAccountUpdateRequestDTO dto,
+    public String updateClientAccount(@PathVariable UUID id, @Valid @ModelAttribute("clientAccountDTO") ClientAccountFormDTO dto,
                                       BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("actionUrl", "/web/client-accounts/" + id + "/edit");
-            return "client-account/form-fragment :: form";
+            model.addAttribute("formAction", "/web/client-accounts/" + id + "/edit");
+            return "client-account/form";
         }
-        clientAccountService.update(id, dto);
-        return listClientAccounts(Pageable.ofSize(5), model);
+        // Converte para o DTO de atualização antes de passar para o serviço
+        ClientAccountUpdateRequestDTO updateDTO = new ClientAccountUpdateRequestDTO(id, dto.getUserName(), dto.getIdentifier());
+        clientAccountService.update(id, updateDTO);
+        return "redirect:/web/client-accounts";
     }
 }
