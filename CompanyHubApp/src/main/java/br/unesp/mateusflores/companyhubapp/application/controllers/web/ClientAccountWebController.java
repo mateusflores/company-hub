@@ -4,7 +4,6 @@ import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.Client
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountFormDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountSummaryDTO;
 import br.unesp.mateusflores.companyhubapp.application.dtos.clientaccount.ClientAccountUpdateRequestDTO;
-import br.unesp.mateusflores.companyhubapp.application.mappers.ClientAccountMapper;
 import br.unesp.mateusflores.companyhubapp.application.services.ClientAccountCRUDService;
 import br.unesp.mateusflores.companyhubapp.exceptions.ResourceNotFoundException;
 import jakarta.validation.Valid;

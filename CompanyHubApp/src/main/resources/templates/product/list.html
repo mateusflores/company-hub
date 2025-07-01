@@ -1,0 +1,36 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: template(pageTitle='Consulta de Produtos', pageContent=~{::content}, activePage='produtos')}">
+
+<div th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mt-4">Consulta de Produtos</h1>
+        <a th:href="@{/web/products/new}" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Cadastrar Produto
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Descrição</th>
+                <th style="width: 10%;">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${productPage.content}">
+                <td th:text="${product.productName()}"></td>
+                <td th:text="${product.productDescription()}"></td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="#"> <i class="bi bi-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav th:replace="~{fragments/pagination :: pagination-nav(page=${productPage}, url='/web/products')}"></nav>
+</div>
+</html>

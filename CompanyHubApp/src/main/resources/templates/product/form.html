@@ -1,0 +1,56 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: template(pageTitle='Cadastro de Produto', pageContent=~{::content}, activePage='produtos')}">
+
+<div th:fragment="content">
+    <h1 class="mt-4 mb-4" th:text="${productForm.id == null ? 'Novo Produto' : 'Editar Produto'}"></h1>
+
+    <div class="card">
+        <div class="card-body">
+            <form th:object="${productForm}" th:action="@{/web/products/create}" method="post">
+
+                <h5>Dados do Produto</h5>
+                <hr>
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Nome do Produto</label>
+                    <input type="text" class="form-control" id="productName" th:field="*{productName}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="productDescription" rows="3" th:field="*{productDescription}"></textarea>
+                </div>
+
+                <h5 class="mt-4">Módulos do Produto</h5>
+                <hr>
+                <h6>Módulo 1</h6>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="moduleName0" class="form-label">Nome do Módulo</label>
+                        <input type="text" class="form-control" id="moduleName0" th:field="*{modules[0].moduleName}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="basePrice0" class="form-label">Preço Base</label>
+                        <input type="number" step="0.01" class="form-control" id="basePrice0" th:field="*{modules[0].basePrice}">
+                    </div>
+                </div>
+                <h6>Módulo 2 (Opcional)</h6>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="moduleName1" class="form-label">Nome do Módulo</label>
+                        <input type="text" class="form-control" id="moduleName1" th:field="*{modules[1].moduleName}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="basePrice1" class="form-label">Preço Base</label>
+                        <input type="number" step="0.01" class="form-control" id="basePrice1" th:field="*{modules[1].basePrice}">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <a th:href="@{/web/products}" class="btn btn-secondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Salvar Produto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

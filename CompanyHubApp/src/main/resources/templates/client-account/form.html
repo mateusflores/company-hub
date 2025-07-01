@@ -22,8 +22,6 @@
                     <div class="text-danger" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></div>
                 </div>
 
-                <hr>
-
                 <div class="d-flex justify-content-end">
                     <a th:href="@{/web/client-accounts}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Salvar</button>
