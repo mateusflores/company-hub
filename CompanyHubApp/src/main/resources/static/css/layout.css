@@ -11,12 +11,10 @@ body {
     z-index: 1000;
 }
 
-/* Empurra o conteúdo principal para a direita para não ficar atrás do menu */
 #wrapper > main {
     margin-left: 280px;
 }
 
-/* Estilo para o item de menu ativo */
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    background-color: #0d6efd; /* Cor azul padrão do Bootstrap */
+    background-color: #0d6efd;
 }
